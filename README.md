@@ -1,17 +1,12 @@
-# movieapp
+## Movie App
 
-A new Flutter project.
+A cross-platform Flutter movie app that allows users to explore movies, view real-time ratings, access cast information, read movie overviews, and get details on movie runtimes. The app also provides categories for Upcoming, Now Playing, and Trending movies.
 
-## Getting Started
+### Features
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# Movie-Review-App
+- Real-time movie ratings.
+- Cast information.
+- Movie overviews and runtime details.
+- Categories for Upcoming, Now Playing, and Trending movies.
+- Efficient state management using Riverpod.
+- Clean Architecture principles for code organization.
