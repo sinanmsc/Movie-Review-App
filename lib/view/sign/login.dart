@@ -1,18 +1,20 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movieapp/Responsive/responsive.dart';
 import 'package:movieapp/component/sign_button.dart';
 import 'package:movieapp/component/text_field.dart';
-import 'package:movieapp/view/home_page.dart';
+import 'package:movieapp/providers/auth_provider.dart';
 import 'package:movieapp/view/sign/sign_up.dart';
 
-class Login extends StatelessWidget {
+class Login extends ConsumerWidget {
   Login({super.key});
 
   final emailText = TextEditingController();
   final passwordText = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
@@ -106,8 +108,20 @@ class Login extends StatelessWidget {
                 ),
                 SizedBox(height: Responsive.height(55, context)),
                 InkWell(
-                    onTap: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomePage())),
+                    onTap: () async {
+                      try {
+                        await ref
+                            .read(authServicesProvider)
+                            .login(emailText.text, passwordText.text);
+                      } on FirebaseAuthException catch (e) {
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('${e.message}')));
+                        }
+                      }
+                      // Navigator.push(context,
+                      //   MaterialPageRoute(builder: (context) => HomePage()));
+                    },
                     child: Signbutton(label: 'Log in')),
                 SizedBox(height: Responsive.height(18, context)),
                 Row(

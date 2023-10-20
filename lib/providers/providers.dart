@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:movieapp/api_services/api_services.dart';
+import 'package:movieapp/model_class/language_model.dart';
+import 'package:movieapp/services/api_services.dart';
 import 'package:movieapp/model_class/cast_model_class.dart';
 import 'package:movieapp/model_class/for_geners.dart';
 import 'package:movieapp/model_class/movie_model_class.dart';
@@ -25,3 +26,7 @@ final searchStringProvider = StateProvider<String>((ref) => '');
 
 final getgenerProvider = FutureProvider.family<ForGeners?, int>(
     (ref, ids) => ref.read(apiSerivicesProvider).getGener(ids));
+
+final getLanguageProvider = FutureProvider<List<LanguageModel>?>((ref) async {
+  return ref.read(apiSerivicesProvider).getLanguage();
+});

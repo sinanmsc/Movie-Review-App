@@ -1,14 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:movieapp/Responsive/responsive.dart';
 import 'package:movieapp/component/sign_button.dart';
 import 'package:movieapp/component/text_field.dart';
-import 'package:movieapp/view/home_page.dart';
+import 'package:movieapp/providers/auth_provider.dart';
 
-class Signup extends StatelessWidget {
-  const Signup({super.key});
-
+class Signup extends ConsumerWidget {
+  Signup({super.key});
+  final emailText = TextEditingController();
+  final passewordText = TextEditingController();
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
@@ -88,21 +91,35 @@ class Signup extends StatelessWidget {
                   style: TextStyle(fontSize: Responsive.width(20, context)),
                 ),
                 SizedBox(height: Responsive.height(10, context)),
-                CustomeTextfield(label: 'Enter Your Email'),
+                CustomeTextfield(
+                  label: 'Enter Your Email',
+                  controller: emailText,
+                ),
                 SizedBox(height: Responsive.height(20, context)),
                 Text(
                   'Password',
                   style: TextStyle(fontSize: Responsive.width(20, context)),
                 ),
                 SizedBox(height: Responsive.height(10, context)),
-                CustomeTextfield(label: 'Pick a strong password'),
+                CustomeTextfield(
+                  label: 'Pick a strong password',
+                  controller: passewordText,
+                ),
                 SizedBox(height: Responsive.height(55, context)),
                 InkWell(
-                    onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const HomePage(),
-                        )),
+                    onTap: () async {
+                      try {
+                        await ref
+                            .read(authServicesProvider)
+                            .signup(emailText.text, passewordText.text);
+                        Navigator.pop(context);
+                      } on FirebaseAuthException catch (e) {
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('${e.message}')));
+                        }
+                      }
+                    },
                     child: Signbutton(label: 'Sign up')),
                 SizedBox(height: Responsive.height(18, context)),
                 Row(

@@ -4,6 +4,7 @@ import 'package:gradient_borders/gradient_borders.dart';
 import 'package:movieapp/Responsive/responsive.dart';
 import 'package:movieapp/component/carousel_trending.dart';
 import 'package:movieapp/component/movie_list.dart';
+import 'package:movieapp/providers/auth_provider.dart';
 import 'package:movieapp/providers/providers.dart';
 import 'package:movieapp/view/library.dart';
 import 'package:movieapp/view/search_page.dart';
@@ -29,7 +30,7 @@ class HomePage extends ConsumerWidget {
               Color.fromARGB(255, 49, 108, 197),
             ],
           ).createShader(bounds),
-          child:  Text(
+          child: Text(
             'CineMagic',
             style: TextStyle(
                 fontFamily: 'style1',
@@ -44,7 +45,7 @@ class HomePage extends ConsumerWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => SearchPage(),
+                      builder: (context) => const SearchPage(),
                     ));
               },
               icon: const Icon(
@@ -58,30 +59,73 @@ class HomePage extends ConsumerWidget {
           child: ListView(
         children: [
           DrawerHeader(
-              child: Column(
-            children: [
-              Container(
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.black,
-                  border: GradientBoxBorder(
-                      gradient: LinearGradient(
-                        colors: [
-                          Color(0xFF31bbc5),
-                          Color.fromARGB(255, 49, 108, 197),
-                        ],
+            child: Center(
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.black,
+                          border: GradientBoxBorder(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Color(0xFF31bbc5),
+                                  Color.fromARGB(255, 49, 108, 197),
+                                ],
+                              ),
+                              width: 3),
+                        ),
+                        height: 100,
+                        width: 100,
                       ),
-                      width: 3),
-                ),
-                height: 100,
-                width: 100,
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      const Text('Name')
+                    ],
+                  ),
+                  Positioned(
+                    right: -10,
+                    bottom: 37,
+                    child: Container(
+                      height: 20,
+                      width: 60,
+                      decoration: BoxDecoration(
+                          color: Colors.amber,
+                          borderRadius: BorderRadius.circular(
+                              Responsive.width(30, context))),
+                    ),
+                  )
+                ],
               ),
-              const SizedBox(
-                height: 10,
+            ),
+          ),
+          InkWell(
+            onTap: () {
+              ref.read(authServicesProvider).logout();
+            },
+            child: Container(
+              margin: EdgeInsets.all(Responsive.width(10, context)),
+              alignment: Alignment.center,
+              height: Responsive.height(50, context),
+              decoration: BoxDecoration(
+                  borderRadius:
+                      BorderRadius.circular(Responsive.width(30, context)),
+                  border: Border.all(
+                      width: Responsive.width(1, context),
+                      color: Colors.white)),
+              child: Text(
+                'Logout',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: Responsive.width(25, context)),
               ),
-              const Text('Name')
-            ],
-          ))
+            ),
+          )
         ],
       )),
       body: SingleChildScrollView(
@@ -91,12 +135,12 @@ class HomePage extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CarouselTrending(),
+                const CarouselTrending(),
                 SizedBox(height: Responsive.height(15, context)),
                 trendingWeak.when(
                     data: (data) {
                       if (data == null) {
-                        return Center(child: CircularProgressIndicator());
+                        return const Center(child: CircularProgressIndicator());
                       }
                       return MovieList(
                         title: 'Trending This Week',
@@ -104,7 +148,8 @@ class HomePage extends ConsumerWidget {
                       );
                     },
                     error: (error, stackTrace) => Center(child: Text('$error')),
-                    loading: () => Center(child: CircularProgressIndicator())),
+                    loading: () =>
+                        const Center(child: CircularProgressIndicator())),
                 SizedBox(height: Responsive.height(15, context)),
                 popularOnTv.when(
                     data: (data) {
@@ -117,9 +162,9 @@ class HomePage extends ConsumerWidget {
                       );
                     },
                     error: (error, stackTrace) => Center(child: Text('$error')),
-                    loading: () => const Center(
-                        child:
-                            CircularProgressIndicator())), // SizedBox(height: Responsive.height(15, context)),
+                    loading: () =>
+                        const Center(child: CircularProgressIndicator())),
+                // SizedBox(height: Responsive.height(15, context)),
                 // MovieList(title: 'Popular in Theatre'),
               ],
             ),
@@ -132,7 +177,7 @@ class HomePage extends ConsumerWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => Library(),
+                builder: (context) => const Library(),
               ));
         },
         child: const Icon(

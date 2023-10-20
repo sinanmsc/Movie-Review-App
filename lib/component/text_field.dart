@@ -21,6 +21,7 @@ class CustomeTextfield extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       onChanged: onChanged,
+      controller: controller,
       decoration: InputDecoration(
         suffixIcon: icon,
         filled: true,

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "807269280603",
+    "project_id": "movie-review-app-abc1b",
+    "storage_bucket": "movie-review-app-abc1b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807269280603:android:a64a5f22a1aa1d5196c87e",
+        "android_client_info": {
+          "package_name": "com.example.movieapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYt6BkGcKkLNI7x7MdPnZ73kVRvZTiTOo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:movieapp/model_class/cast_model_class.dart';
 import 'package:movieapp/model_class/for_geners.dart';
+import 'package:movieapp/model_class/language_model.dart';
 import 'package:movieapp/model_class/movie_model_class.dart';
 
 class ApiServices {
@@ -88,6 +89,20 @@ class ApiServices {
       if (response.statusCode == 200) {
         String json = jsonEncode(response.data);
         return forGenersFromJson(json);
+      }
+      return null;
+    } on DioException catch (e) {
+      log('$e');
+    }
+    return null;
+  }
+
+  Future<List<LanguageModel>?> getLanguage() async {
+    try {
+      Response response = await dio.get('/configuration/languages');
+      if (response.statusCode == 200) {
+        String json = jsonEncode(response.data);
+        return languageModelFromJson(json);
       }
       return null;
     } on DioException catch (e) {
