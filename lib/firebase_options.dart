@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCYt6BkGcKkLNI7x7MdPnZ73kVRvZTiTOo',
-    appId: '1:807269280603:android:a64a5f22a1aa1d5196c87e',
-    messagingSenderId: '807269280603',
-    projectId: 'movie-review-app-abc1b',
-    storageBucket: 'movie-review-app-abc1b.appspot.com',
+    apiKey: 'AIzaSyCRkB9t4IVIBEIencMDOqVu-NWrHEUiiuE',
+    appId: '1:1089945822055:android:f5986d021c9954eb8105c2',
+    messagingSenderId: '1089945822055',
+    projectId: 'cinemagic-2af7b',
+    storageBucket: 'cinemagic-2af7b.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCGd4WT1PIEXUAZtzv9NlXlQLNLggZufVc',
-    appId: '1:807269280603:ios:2aba3622128386fc96c87e',
-    messagingSenderId: '807269280603',
-    projectId: 'movie-review-app-abc1b',
-    storageBucket: 'movie-review-app-abc1b.appspot.com',
+    apiKey: 'AIzaSyDcGBODLCA5PQOTYtNqFWHsIs_z2blGGZ0',
+    appId: '1:1089945822055:ios:4a6a879b5c7809fb8105c2',
+    messagingSenderId: '1089945822055',
+    projectId: 'cinemagic-2af7b',
+    storageBucket: 'cinemagic-2af7b.appspot.com',
     iosBundleId: 'com.example.movieapp',
   );
 }

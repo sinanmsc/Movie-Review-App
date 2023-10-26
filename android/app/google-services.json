@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "807269280603",
-    "project_id": "movie-review-app-abc1b",
-    "storage_bucket": "movie-review-app-abc1b.appspot.com"
+    "project_number": "1089945822055",
+    "project_id": "cinemagic-2af7b",
+    "storage_bucket": "cinemagic-2af7b.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:807269280603:android:a64a5f22a1aa1d5196c87e",
+        "mobilesdk_app_id": "1:1089945822055:android:f5986d021c9954eb8105c2",
         "android_client_info": {
           "package_name": "com.example.movieapp"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCYt6BkGcKkLNI7x7MdPnZ73kVRvZTiTOo"
+          "current_key": "AIzaSyCRkB9t4IVIBEIencMDOqVu-NWrHEUiiuE"
         }
       ],
       "services": {

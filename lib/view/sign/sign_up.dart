@@ -5,10 +5,13 @@ import 'package:movieapp/Responsive/responsive.dart';
 import 'package:movieapp/component/sign_button.dart';
 import 'package:movieapp/component/text_field.dart';
 import 'package:movieapp/providers/auth_provider.dart';
+import 'package:movieapp/services/firestore_services.dart';
 
 class Signup extends ConsumerWidget {
   Signup({super.key});
+  final nameText = TextEditingController();
   final emailText = TextEditingController();
+
   final passewordText = TextEditingController();
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -84,7 +87,10 @@ class Signup extends ConsumerWidget {
                   style: TextStyle(fontSize: Responsive.width(20, context)),
                 ),
                 SizedBox(height: Responsive.height(10, context)),
-                CustomeTextfield(label: 'Enter Your Name'),
+                CustomeTextfield(
+                  label: 'Enter Your Name',
+                  controller: nameText,
+                ),
                 SizedBox(height: Responsive.height(20, context)),
                 Text(
                   'Email',
@@ -109,11 +115,26 @@ class Signup extends ConsumerWidget {
                 InkWell(
                     onTap: () async {
                       try {
-                        await ref
+                        final UserCredential userCredential = await ref
                             .read(authServicesProvider)
                             .signup(emailText.text, passewordText.text);
-                        Navigator.pop(context);
+                        if (userCredential.user != null) {
+                          await FirestoreServices.addUserData(
+                            userCredential.user!.uid,
+                            userCredential.user!.displayName ?? nameText.text,
+                            userCredential.user!.email!,
+                            userCredential.user?.photoURL,
+                          );
+                          if (context.mounted) {
+                            Navigator.pop(context);
+                          }
+                        }
                       } on FirebaseAuthException catch (e) {
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('${e.message}')));
+                        }
+                      } on FirebaseException catch (e) {
                         if (context.mounted) {
                           ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(content: Text('${e.message}')));
